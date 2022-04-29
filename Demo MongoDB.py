@@ -1,9 +1,11 @@
 #Demo MongoDB
 import pymongo
+import certifi
+ca = certifi.where()
 
 #Connect
-connectstring = "mongodb+srv://Zoozoo7:<password>@cluster0.avxht.mongodb.net/myFirstDatabase?retryWrites=true&w=majority, --tlsAllowInvalidCertificates"
-myclient = pymongo.MongoClient(connectstring)
+connectstring = "mongodb+srv://Zoozoo7:<SomePassword>@cluster0.avxht.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+myclient = pymongo.MongoClient(connectstring, tlsCAFile=ca)
 
 #Create
 mydb = myclient["mydatabase"]
@@ -17,8 +19,8 @@ mycol = mydb["customers"]
 
 #Find/Show/Print
 #Find All
-for x in mycol.find():
-    print(x)
+#for x in mycol.find():
+#    print(x)
 
 # "Select" columns
 #Exlude last name and id
@@ -26,9 +28,9 @@ for x in mycol.find():
 #   print (x)
 
 #Update One - Only first one
-myquery = {"company":"KEA"}
-newvalues = {"$set": {"company":"New KEA"}}
-mycol.update_one(myquery, newvalues)
+#myquery = {"company":"KEA"}
+#newvalues = {"$set": {"company":"New KEA"}}
+#mycol.update_one(myquery, newvalues)
 
 #Drop Delecte collection
 #mycol.drop()
